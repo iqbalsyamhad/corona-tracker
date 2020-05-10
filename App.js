@@ -21,7 +21,7 @@ import AnimatedLoader from "react-native-animated-loader";
 import Apimanager from './app/data/api';
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.mapRef = null;
     this.markerRef = null;
@@ -30,7 +30,7 @@ class App extends Component {
       source: 'jhu',
       countryid: "ID",
       country: "Indonesia",
-      infected: {confirmed: 0, sick: 0, deaths: 0, recovered: 0},
+      infected: { confirmed: 0, sick: 0, deaths: 0, recovered: 0 },
       piecolor: ['#ff8040', '#ff0000', '#00df00'],
       marker: [],
       countrylist: []
@@ -42,66 +42,66 @@ class App extends Component {
   }
 
   getData = async (countryid) => {
-    this.setState({isloading: true})
+    this.setState({ isloading: true })
 
     let collection = {}
     collection.source = this.state.source
-    if(countryid != "GLOBAL"){
+    if (countryid != "GLOBAL") {
       collection.country_code = countryid
     }
     await Apimanager.getLocations(collection)
-    .then(response => {
-      if(response.status == 'success'){
-        this.parseData(response.value, countryid);
-      } else {
-        this.setState({isloading: false});
-        alert(response.value);
-      }
-    });
+      .then(response => {
+        if (response.status == 'success') {
+          this.parseData(response.value, countryid);
+        } else {
+          this.setState({ isloading: false });
+          alert(response.value);
+        }
+      });
   }
 
   getAllCountry = async () => {
-    await Apimanager.getLocations({"source": this.state.source})
-    .then(response => {
-      if(response.status == 'success'){
-        let result = response.value;
-        
-        let countrylist = [];
-        let cidtemp = "";
-        result.locations.map(value => {
-          if(value.country_code != cidtemp){
-            countrylist.push({
-              countrycode: value.country_code,
-              country: value.country
-            })
-            cidtemp = value.country_code
-          }
-        });
+    await Apimanager.getLocations({ "source": this.state.source })
+      .then(response => {
+        if (response.status == 'success') {
+          let result = response.value;
 
-        this.setState({
-          countrylist: countrylist,
-        });
+          let countrylist = [];
+          let cidtemp = "";
+          result.locations.map(value => {
+            if (value.country_code != cidtemp) {
+              countrylist.push({
+                countrycode: value.country_code,
+                country: value.country
+              })
+              cidtemp = value.country_code
+            }
+          });
 
-        this.getData(this.state.countryid);
-      } else {
-        this.setState({isloading: false});
-        alert(response.value);
-      }
-    });
+          this.setState({
+            countrylist: countrylist,
+          });
+
+          this.getData(this.state.countryid);
+        } else {
+          this.setState({ isloading: false });
+          alert(response.value);
+        }
+      });
   }
 
   parseData = (result, countryid) => {
     let infected = {
       confirmed: result.latest.confirmed,
-      sick: result.latest.confirmed-(result.latest.deaths+result.latest.recovered),
+      sick: result.latest.confirmed - (result.latest.deaths + result.latest.recovered),
       deaths: result.latest.deaths,
       recovered: result.latest.recovered
     }
-    
+
     let countryname = result.locations[0].country
     let marker = []
 
-    if(countryid != 'GLOBAL'){
+    if (countryid != 'GLOBAL') {
       result.locations.map(value => {
         marker.push({
           countrycode: value.country_code,
@@ -113,7 +113,7 @@ class App extends Component {
       });
     } else {
       countryname = 'GLOBAL'
-      this.setState({isloading: false})
+      this.setState({ isloading: false })
     }
 
     this.setState({
@@ -126,20 +126,19 @@ class App extends Component {
 
   renderCallout() {
     this.markerRef.showCallout();
-    this.setState({isloading: false});
+    this.setState({ isloading: false });
   }
 
   render() {
     const numbeformat = require('./app/helper/number');
-    const data = [this.state.infected.sick, this.state.infected.deaths, this.state.infected.recovered]
-    const pieData = data
-      .map((value, index) => ({
-        value,
-        svg: {
-          fill: this.state.piecolor[index]
-        },
-        key: index
-      }));
+    const data = [this.state.infected.sick, this.state.infected.deaths, this.state.infected.recovered];
+    const pieData = data.map((value, index) => ({
+      value,
+      svg: {
+        fill: this.state.piecolor[index]
+      },
+      key: index
+    }));
     return (
       <>
         <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
@@ -148,11 +147,11 @@ class App extends Component {
             visible={this.state.isloading}
             overlayColor="rgba(0,0,0,0.8)"
             source={require("./assets/json/greencovid.json")}
-            animationStyle={{width: 100, height: 100}}
+            animationStyle={{ width: 100, height: 100 }}
             speed={1}
           />
           <Card style={styles.regionpicker}>
-            <Text style={{alignSelf: 'flex-start', margin: 5}}>Select Region</Text>
+            <Text style={{ alignSelf: 'flex-start', margin: 5 }}>Select Region</Text>
             <Item picker>
               <Picker
                 mode="dropdown"
@@ -160,12 +159,12 @@ class App extends Component {
                 style={{ width: undefined }}
                 selectedValue={this.state.countryid}
                 onValueChange={(value) => this.getData(value)}
-                >
+              >
                 <Picker.Item key={"GLOBAL"} label="Global" value="GLOBAL" />
                 {this.state.countrylist
-                .map(item => (
-                  <Picker.Item key={item.countrycode} label={item.country} value={item.countrycode} />
-                ))}
+                  .map(item => (
+                    <Picker.Item key={item.countrycode} label={item.country} value={item.countrycode} />
+                  ))}
               </Picker>
             </Item>
           </Card>
@@ -176,21 +175,21 @@ class App extends Component {
             </CardItem>
             <CardItem>
               <Body>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <View style={styles.piechart}>
                     <PieChart style={{ height: 100 }} data={pieData} />
                   </View>
                   <View style={styles.legendchart}>
                     <View style={styles.legenditem}>
-                      <View style={{backgroundColor: this.state.piecolor[0], width: 10, height: 10, marginRight: 5}} />
+                      <View style={{ backgroundColor: this.state.piecolor[0], width: 10, height: 10, marginRight: 5 }} />
                       <Text>Infected: {numbeformat(this.state.infected.sick)}</Text>
                     </View>
                     <View style={styles.legenditem}>
-                      <View style={{backgroundColor: this.state.piecolor[1], width: 10, height: 10, marginRight: 5}} />
+                      <View style={{ backgroundColor: this.state.piecolor[1], width: 10, height: 10, marginRight: 5 }} />
                       <Text>Death: {numbeformat(this.state.infected.deaths)}</Text>
                     </View>
                     <View style={styles.legenditem}>
-                      <View style={{backgroundColor: this.state.piecolor[2], width: 10, height: 10, marginRight: 5}} />
+                      <View style={{ backgroundColor: this.state.piecolor[2], width: 10, height: 10, marginRight: 5 }} />
                       <Text>Recovered: {numbeformat(this.state.infected.recovered)}</Text>
                     </View>
                   </View>
@@ -199,39 +198,39 @@ class App extends Component {
             </CardItem>
           </Card>
           {this.state.marker.length > 0 ?
-          <MapView
-            style={{flex: 1}}
-            ref={(ref) => { this.mapRef = ref }}
-            customMapStyle={require('./assets/json/mapstyle.json')}
-            moveOnMarkerPress={false}
-            region={{
-              latitude: parseFloat(this.state.marker[0].latlng.latitude),
-              longitude: parseFloat(this.state.marker[0].latlng.longitude),
-              latitudeDelta: 40.0000,
-              longitudeDelta: 40.0000,
-            }}
-            onRegionChangeComplete={() => this.renderCallout()}>
-            {this.state.marker.map((item, index) => (
-              <Marker
-                key={index}
-                ref={(ref) => { this.markerRef = ref }}
-                coordinate={{
-                  latitude: parseFloat(item.latlng.latitude),
-                  longitude: parseFloat(item.latlng.longitude),
-                }}
-                title={item.province+" "+item.country}
-                description={"Confirmed: "+numbeformat(item.latest.confirmed)}>
-                <Image source={require('./assets/images/pin.png')} style={{width: 30, height: 30}} />
-               </Marker>
-            ))}
-          </MapView>
-          :
-          <MapView
-            style={{flex: 1}}
-            ref={(ref) => { this.mapRef = ref }}
-            customMapStyle={require('./assets/json/mapstyle.json')}
-            moveOnMarkerPress={false}
-          />
+            <MapView
+              style={{ flex: 1 }}
+              ref={(ref) => { this.mapRef = ref }}
+              customMapStyle={require('./assets/json/mapstyle.json')}
+              moveOnMarkerPress={false}
+              region={{
+                latitude: parseFloat(this.state.marker[0].latlng.latitude),
+                longitude: parseFloat(this.state.marker[0].latlng.longitude),
+                latitudeDelta: 30.0000,
+                longitudeDelta: 30.0000,
+              }}
+              onRegionChangeComplete={() => this.renderCallout()}>
+              {this.state.marker.map((item, index) => (
+                <Marker
+                  key={index}
+                  ref={(ref) => { this.markerRef = ref }}
+                  coordinate={{
+                    latitude: parseFloat(item.latlng.latitude),
+                    longitude: parseFloat(item.latlng.longitude),
+                  }}
+                  title={item.province + " " + item.country}
+                  description={"Confirmed: " + numbeformat(item.latest.confirmed)}>
+                  <Image source={require('./assets/images/pin.png')} style={{ width: 30, height: 30 }} />
+                </Marker>
+              ))}
+            </MapView>
+            :
+            <MapView
+              style={{ flex: 1 }}
+              ref={(ref) => { this.mapRef = ref }}
+              customMapStyle={require('./assets/json/mapstyle.json')}
+              moveOnMarkerPress={false}
+            />
           }
         </View>
       </>

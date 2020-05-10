@@ -1,6 +1,7 @@
 const Apimanager = {
 
     call: (url, collection) => {
+        const fetch = require('node-fetch');
         const endpoint = "http://coronavirus-tracker-api.herokuapp.com/v2/";
 
         return new Promise(function(resolve, reject) {
