@@ -27,3 +27,6 @@ Unit Testing for API with mock jest
 
 <a href="https://github.com/iqbalsyamhad/corona-tracker/blob/master/apk/coronatracker.apk">Here</a> is debug apk.
 
+## Disclaimer
+
+This API always return 0 for recovered COVID19 patient during development, but this app tested with dummy data. And this app doesnt have pull to refresh because this app implement map to be background, other than that this app always fetch new data every user switch region.
