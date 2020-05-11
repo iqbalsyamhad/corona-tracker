@@ -64,7 +64,7 @@ class App extends Component {
     await Apimanager.getLocations({ "source": this.state.source })
       .then(response => {
         if (response.status == 'success') {
-          let result = response.value;
+          let result = response.value.json();
 
           let countrylist = [];
           let cidtemp = "";
@@ -90,7 +90,8 @@ class App extends Component {
       });
   }
 
-  parseData = (result, countryid) => {
+  parseData = (response, countryid) => {
+    let result = response.json()
     let infected = {
       confirmed: result.latest.confirmed,
       sick: result.latest.confirmed - (result.latest.deaths + result.latest.recovered),

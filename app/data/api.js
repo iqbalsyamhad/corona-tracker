@@ -1,18 +1,20 @@
+import RNFetchBlob from 'react-native-fetch-blob';
+
 const Apimanager = {
 
     call: (url, collection) => {
-        const fetch = require('node-fetch');
         const endpoint = "http://coronavirus-tracker-api.herokuapp.com/v2/";
 
-        return new Promise(function(resolve, reject) {
-            fetch(endpoint+url+collection, {
-                method: 'GET',
-                headers: {
+        return new Promise(function (resolve, reject) {
+            RNFetchBlob
+            // .config({
+            //     trusty: true
+            // })
+            .fetch('GET', endpoint + url + collection, {
                 'Content-Type': 'application/json'
-                }
             })
             .then((res) => {
-                if(res.status == 200) resolve(res.json());
+                if (res.respInfo.status == 200) resolve(res);
                 else reject('Failed to get data from API.');
             })
             .catch((error) => {
@@ -25,18 +27,18 @@ const Apimanager = {
     getLocations: async (collection) => {
         let result = {};
         await Apimanager.call("locations?", Apimanager.objToQuery(collection))
-        .then((response) => {
-            result = {
-                value: response,
-                status: 'success'
-            }
-        })
-        .catch(error => {
-            result = {
-                value: error.message,
-                status: 'failed'
-            }
-        });
+            .then((response) => {
+                result = {
+                    value: response,
+                    status: 'success'
+                }
+            })
+            .catch(error => {
+                result = {
+                    value: error.message,
+                    status: 'failed'
+                }
+            });
         return result;
     },
 

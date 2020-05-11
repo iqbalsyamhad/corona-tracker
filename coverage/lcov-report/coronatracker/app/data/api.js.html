@@ -22,23 +22,23 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.96% </span>
+                <span class="strong">89.29% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>40/46</span>
+                <span class='fraction'>25/28</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">70% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/8</span>
+                <span class='fraction'>7/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.35% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>14/17</span>
+                <span class='fraction'>8/10</span>
             </div>
         
             
@@ -107,21 +107,25 @@
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">12x</span>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -131,11 +135,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -145,37 +149,39 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">const Apimanager = {<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+<span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">import RNFetchBlob from 'react-native-fetch-blob';<span class="branch-0 cbranch-no" title="branch not covered" ></span>
+&nbsp;
+const Apimanager = {
 &nbsp;
     call: (url, collection) =&gt; {
-        const fetch = require('node-fetch');
         const endpoint = "http://coronavirus-tracker-api.herokuapp.com/v2/";
 &nbsp;
-        return new Promise(function(resolve, reject) {
-            fetch(endpoint+url+collection, {
-                method: 'GET',
-                headers: {
+        return new Promise(function (resolve, reject) {
+            RNFetchBlob
+            // .config({
+            //     trusty: true
+            // })
+            .fetch('GET', endpoint + url + collection, {
                 'Content-Type': 'application/json'
-                }
             })
             .then((res) =&gt; {
-        <span class="missing-if-branch" title="else path not taken" >E</span>        if(res.status == 200) resolve(res.json());
+        <span class="missing-if-branch" title="else path not taken" >E</span>        if (res.respInfo.status == 200) resolve(res);
 <span class="cstat-no" title="statement not covered" >                else reject('Failed to get data </span>from API.');
             })
-<span class="fstat-no" title="function not covered" ></span>            .catch((error) =&gt; {
+<span class="fstat-no" title="function not covered" >            .c</span>atch((error) =&gt; {
 <span class="cstat-no" title="statement not covered" >                reject(</span>error);
             })
             .done()
@@ -185,19 +191,19 @@
     getLocations: async (collection) =&gt; {
         let result = {};
         await Apimanager.call("locations?", Apimanager.objToQuery(collection))
-        .then((response) =&gt; {
-            result = {
-                value: response,
-                status: 'success'
-            }
-        })
-        .catch(e<span class="fstat-no" title="function not covered" >rr</span>or =&gt; {
-            result<span class="cstat-no" title="statement not covered" > = {</span>
-                value: error.message,
-                status: 'failed'
-            }
-        });
-        return result;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
+            .then((response) =&gt; {
+                result = {
+                    value: response,
+                    status: 'success'
+                }
+            })
+            .catch<span class="fstat-no" title="function not covered" >(e</span>rror =&gt; {
+<span class="cstat-no" title="statement not covered" >                result = {</span>
+                    value: error.message,
+                    status: 'failed'
+                }
+            });
+        return resul<span class="branch-2 cbranch-no" title="branch not covered" >t;</span>
     },
 &nbsp;
     objToQuery: (collection) =&gt; {
@@ -216,7 +222,7 @@ export default Apimanager;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon May 11 2020 01:26:48 GMT+0700 (Western Indonesia Time)
+                at Mon May 11 2020 07:45:46 GMT+0700 (Western Indonesia Time)
             </div>
         </div>
         <script src="..\..\..\prettify.js"></script>

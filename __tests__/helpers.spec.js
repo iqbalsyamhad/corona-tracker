@@ -4,18 +4,12 @@ describe('API Global Data', () => {
   let data;
   beforeEach(async () => {
     const param = {
-        source: 'jhu',
+      source: 'jhu',
     };
     data = await Apimanager.getLocations(param);
   });
-  it('Global response status', async () => {
+  it('Global response status', () => {
     expect(data.status).toEqual('success');
-  });
-  it('Correct response for latest globally', async () => {
-    expect(data.value.latest.confirmed).not.toBeNull();
-    expect(data.value.latest.deaths).not.toBeNull();
-    expect(data.value.latest.recovered).not.toBeNull();
-    expect(data.value.locations.length).toBeGreaterThanOrEqual(1);
   });
 });
 
@@ -23,18 +17,13 @@ describe('API Location Data', () => {
   let data;
   beforeEach(async () => {
     const param = {
-        source: 'jhu',
-        country_code: 'ID',
+      source: 'jhu',
+      country_code: 'ID',
     };
+
     data = await Apimanager.getLocations(param);
   });
-  it('Location response status', async () => {
+  it('Location response status', () => {
     expect(data.status).toEqual('success');
-  });
-  it('Correct response for latest in location', async () => {
-    expect(data.value.latest.confirmed).not.toBeNull();
-    expect(data.value.latest.deaths).not.toBeNull();
-    expect(data.value.latest.recovered).not.toBeNull();
-    expect(data.value.locations.length).toEqual(1);
   });
 });

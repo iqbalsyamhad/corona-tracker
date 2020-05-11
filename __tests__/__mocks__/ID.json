@@ -1,0 +1,35 @@
+{
+    "array": [],
+    "base64": [],
+    "blob": [],
+    "data": "{\"latest\":{\"confirmed\":13645,\"deaths\":959,\"recovered\":0},\"locations\":[{\"id\":132,\"country\":\"Indonesia\",\"country_code\":\"ID\",\"country_population\":267663435,\"province\":\"\",\"last_updated\":\"2020-05-11T00:02:09.612065Z\",\"coordinates\":{\"latitude\":\"-0.7893\",\"longitude\":\"113.9213\"},\"latest\":{\"confirmed\":13645,\"deaths\":959,\"recovered\":0}}]}",
+    "flush": [],
+    "info": [],
+    "json": [],
+    "path": [],
+    "readFile": [],
+    "readStream": [],
+    "respInfo": {
+        "headers": {
+            "Connection": "keep-alive",
+            "Content-Length": "330",
+            "Content-Type": "application/json",
+            "Date": "Mon, 11 May 2020 00:03:14 GMT",
+            "Server": "uvicorn",
+            "Via": "1.1 vegur"
+        },
+        "redirects": [
+            "http://coronavirus-tracker-api.herokuapp.com/v2/locations?source=jhu&country_code=ID"
+        ],
+        "respType": "json",
+        "rnfbEncode": "utf8",
+        "state": "2",
+        "status": 200,
+        "taskId": "id411oc6nyqufoek8qzida",
+        "timeout": false
+    },
+    "session": [],
+    "taskId": "id411oc6nyqufoek8qzida",
+    "text": [],
+    "type": "utf8"
+}
