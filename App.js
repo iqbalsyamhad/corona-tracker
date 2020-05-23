@@ -27,7 +27,6 @@ class App extends Component {
     this.markerRef = null;
     this.state = {
       isloading: true,
-      source: 'jhu',
       countryid: "ID",
       country: "Indonesia",
       infected: { confirmed: 0, sick: 0, deaths: 0, recovered: 0 },
@@ -44,12 +43,11 @@ class App extends Component {
   getData = async (countryid) => {
     this.setState({ isloading: true })
 
-    let collection = {}
-    collection.source = this.state.source
+    let param = ""
     if (countryid != "GLOBAL") {
-      collection.country_code = countryid
+      param = countryid
     }
-    await Apimanager.getLocations(collection)
+    await Apimanager.getData(param)
       .then(response => {
         if (response.status == 'success') {
           this.parseData(response.value, countryid);
@@ -61,21 +59,15 @@ class App extends Component {
   }
 
   getAllCountry = async () => {
-    await Apimanager.getLocations({ "source": this.state.source })
+    await Apimanager.getAllCountry()
       .then(response => {
         if (response.status == 'success') {
-          let result = response.value.json();
-
           let countrylist = [];
-          let cidtemp = "";
-          result.locations.map(value => {
-            if (value.country_code != cidtemp) {
-              countrylist.push({
-                countrycode: value.country_code,
-                country: value.country
-              })
-              cidtemp = value.country_code
-            }
+          response.value.countries.map(value => {
+            countrylist.push({
+              countrycode: value.iso2,
+              country: value.name
+            })
           });
 
           this.setState({

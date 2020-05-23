@@ -3,13 +3,13 @@ import RNFetchBlob from 'react-native-fetch-blob';
 const Apimanager = {
 
     call: (url, collection) => {
-        const endpoint = "http://coronavirus-tracker-api.herokuapp.com/v2/";
+        const endpoint = "https://covid19.mathdro.id/api/";
 
         return new Promise(function (resolve, reject) {
             RNFetchBlob
-            // .config({
-            //     trusty: true
-            // })
+            .config({
+                trusty: true
+            })
             .fetch('GET', endpoint + url + collection, {
                 'Content-Type': 'application/json'
             })
@@ -24,12 +24,30 @@ const Apimanager = {
         });
     },
 
-    getLocations: async (collection) => {
+    getData: async (param) => {
         let result = {};
-        await Apimanager.call("locations?", Apimanager.objToQuery(collection))
+        await Apimanager.call(param, "")
             .then((response) => {
                 result = {
-                    value: response,
+                    value: response.json(),
+                    status: 'success'
+                }
+            })
+            .catch(error => {
+                result = {
+                    value: error.message,
+                    status: 'failed'
+                }
+            });
+        return result;
+    },
+
+    getAllCountry: async () => {
+        let result = {};
+        await Apimanager.call("countries", "")
+            .then((response) => {
+                result = {
+                    value: response.json(),
                     status: 'success'
                 }
             })
