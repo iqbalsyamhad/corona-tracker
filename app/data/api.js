@@ -7,38 +7,48 @@ const Apimanager = {
 
         return new Promise(function (resolve, reject) {
             RNFetchBlob
-            .config({
-                trusty: true
-            })
-            .fetch('GET', endpoint + url + collection, {
-                'Content-Type': 'application/json'
-            })
-            .then((res) => {
-                if (res.respInfo.status == 200) resolve(res);
-                else reject('Failed to get data from API.');
-            })
-            .catch((error) => {
-                reject(error);
-            })
-            .done()
+                .config({
+                    trusty: true
+                })
+                .fetch('GET', endpoint + url + collection, {
+                    'Content-Type': 'application/json'
+                })
+                .then((res) => {
+                    if (res.respInfo.status == 200) resolve(res);
+                    else reject('Failed to get data from API.');
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+                .done()
         });
     },
 
     getData: async (param) => {
-        let result = {};
+        let result = {}
+        result.status = 'success'
+        let total = {}
+        let locations = {}
+
         await Apimanager.call(param, "")
             .then((response) => {
-                result = {
-                    value: response.json(),
-                    status: 'success'
-                }
+                total = response.json()
             })
             .catch(error => {
-                result = {
-                    value: error.message,
-                    status: 'failed'
-                }
+                result.status = 'failed'
             });
+
+        await Apimanager.call(param+"/confirmed", "")
+            .then((response) => {
+                locations = response.json()
+            })
+            .catch(error => {
+                result.status = 'failed'
+            });
+
+        result.total = total
+        result.locations = locations
+        
         return result;
     },
 

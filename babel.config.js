@@ -3,7 +3,6 @@ module.exports = {
         ["module:metro-react-native-babel-preset"]
     ],
     plugins: [
-        '@babel/plugin-syntax-dynamic-import',
-        '@babel/plugin-proposal-class-properties'
+        '@babel/plugin-syntax-dynamic-import'
     ]
 };

@@ -40,24 +40,6 @@ class App extends Component {
     await this.getAllCountry()
   }
 
-  getData = async (countryid) => {
-    this.setState({ isloading: true })
-
-    let param = ""
-    if (countryid != "GLOBAL") {
-      param = countryid
-    }
-    await Apimanager.getData(param)
-      .then(response => {
-        if (response.status == 'success') {
-          this.parseData(response.value, countryid);
-        } else {
-          this.setState({ isloading: false });
-          alert(response.value);
-        }
-      });
-  }
-
   getAllCountry = async () => {
     await Apimanager.getAllCountry()
       .then(response => {
@@ -79,29 +61,53 @@ class App extends Component {
           this.setState({ isloading: false });
           alert(response.value);
         }
-      });
+      })
   }
 
-  parseData = (response, countryid) => {
-    let result = response.json()
+  getData = async (countryid) => {
+    this.setState({ isloading: true })
+
+    let param = ""
+    if (countryid != "GLOBAL") {
+      param = "countries/" + countryid
+    }
+    await Apimanager.getData(param)
+      .then(response => {
+        if (response.status == 'success') {
+          this.parseData(response, countryid);
+        } else {
+          this.setState({ isloading: false });
+          alert("Gagal memuat data");
+        }
+      })
+  }
+
+  parseData = (result, countryid) => {
     let infected = {
-      confirmed: result.latest.confirmed,
-      sick: result.latest.confirmed - (result.latest.deaths + result.latest.recovered),
-      deaths: result.latest.deaths,
-      recovered: result.latest.recovered
+      confirmed: result.total.confirmed.value,
+      sick: result.total.confirmed.value - (result.total.deaths.value + result.total.recovered.value),
+      deaths: result.total.deaths.value,
+      recovered: result.total.recovered.value
     }
 
-    let countryname = result.locations[0].country
+    let countryname = result.locations[0].countryRegion
     let marker = []
 
     if (countryid != 'GLOBAL') {
       result.locations.map(value => {
         marker.push({
-          countrycode: value.country_code,
-          latlng: value.coordinates,
-          latest: value.latest,
-          province: value.province,
-          country: value.country
+          countrycode: value.iso3,
+          latlng: {
+            "latitude": value.lat,
+            "longitude": value.long
+          },
+          latest: {
+            "confirmed": value.confirmed,
+            "deaths": value.deaths,
+            "recovered": value.recovered
+          },
+          province: value.combinedKey,
+          country: value.countryRegion
         })
       });
     } else {
@@ -114,7 +120,7 @@ class App extends Component {
       marker: marker,
       countryid: countryid,
       country: countryname,
-    });
+    })
   }
 
   renderCallout() {
