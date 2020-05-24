@@ -18,11 +18,3 @@ Showing count of confirmed COVID19 patient (infected, deaths and recovered) in r
 ```
 https://covid19.mathdro.id/api/
 ```
-
-## Testing
-
-Unit Testing for API with mock jest
-
-## Disclaimer
-
-This app doesnt have pull to refresh because this app implement map to be background, other than that this app always fetch new data every user switch region.
