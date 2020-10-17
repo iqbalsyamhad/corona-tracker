@@ -77,7 +77,7 @@ class App extends Component {
           this.parseData(response, countryid);
         } else {
           this.setState({ isloading: false });
-          alert("Gagal memuat data");
+          alert("Failed to retrieve data for this request");
         }
       })
   }
